@@ -1,0 +1,37 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.navbar {
+  background-color: #e65100;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.navbar .logo i {
+  margin-right: 8px;
+}
+
+.navbar .menu i {
+  font-size: 22px;
+  cursor: pointer;
+}
+.logo-icon {
+  width: 20px;
+  height: 20px;
+}
+.bars {
+  text-decoration: none;
+  color: black;
+}
