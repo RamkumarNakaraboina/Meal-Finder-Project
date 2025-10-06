@@ -1,37 +1,181 @@
-* {
-  margin: 0px;
-  padding: 0px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
 }
-.navbar {
-  background-color: #e65100;
+.icon-img {
+  width: 30px;
+  height: 30px;
+}
+.menu-icon {
+  width: 25px;
+  height: 25px;
+}
+header {
+  background-color: #ff6f00;
   color: white;
+  padding: 30px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  font-family: Arial, sans-serif;
 }
-
-.navbar .logo {
+.header-icon {
   display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 18px;
+  flex-direction: row;
 }
-
-.navbar .logo i {
-  margin-right: 8px;
+header h1 {
+  margin: 0;
+  font-size: 1.5em;
 }
-
-.navbar .menu i {
-  font-size: 22px;
-  cursor: pointer;
-}
-.logo-icon {
-  width: 20px;
-  height: 20px;
-}
-.bars {
+header h1 a {
   text-decoration: none;
+  color: white;
+}
+.banner {
+  background: url("./accessts/images/background.jpeg") no-repeat center/cover,
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://via.placeholder.com/1200x400?text=Tablecloth+Background"); /* Placeholder; replace with actual URL */
+  color: white;
+  height: 300px;
+  text-align: center;
+  padding: 50px 20px;
+  position: relative;
+  backdrop-filter: blur(20px);
+}
+.search-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  max-width: 600px;
+}
+.search-input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 1em;
+}
+.search-button {
+  background-color: #ff6f00;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  margin-left: -40px;
+}
+.banner-text {
+  margin-top: 130px;
+  color: white;
+}
+.categories-section,
+.meals-section {
+  padding: 20px;
+}
+.banner-text2 {
+  color: white;
+  font-size: 35px;
+}
+h2 {
   color: black;
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+.category-grid,
+.meal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.card-label {
+  background: #ff6f00;
+  color: white;
+  padding: 5px 10px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.meal-card {
+  text-align: left;
+  padding: 10px;
+}
+.meal-tag {
+  background: #ff6f00;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+#meal-details {
+  padding: 20px;
+  display: none;
+}
+#category-details {
+  padding: 20px;
+  display: none;
+}
+.ingredients-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+.ingredient {
+  background: #ff6f00;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  text-align: center;
+}
+.measures {
+  margin-top: 20px;
+}
+.back-button {
+  background: #ff6f00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+/* Sidebar for categories, visible on desktop */
+.sidebar {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: none; /* Show on larger screens */
+}
+@media (min-width: 768px) {
+  .sidebar {
+    display: block;
+  }
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar li {
+  margin-bottom: 10px;
+  cursor: pointer;
 }
