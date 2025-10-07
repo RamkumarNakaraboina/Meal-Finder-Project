@@ -24,6 +24,9 @@ async function loadCategories() {
     grid.appendChild(card);
 
     // Sidebar
+    const slidebar = document.querySelector(".menu-icon");
+    slidebar.addEventListener("click", () => {});
+
     const li = document.createElement("li");
     li.textContent = cat.strCategory;
     li.onclick = () =>

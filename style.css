@@ -8,6 +8,7 @@ body {
   height: 30px;
 }
 .menu-icon {
+  padding-right: 50px;
   width: 25px;
   height: 25px;
 }
@@ -58,15 +59,36 @@ header h1 a {
     url("./accessts/images/background.jpeg") no-repeat center/cover;
   filter: blur(3px);
 }
+.anime {
+  width: 90px;
+  height: 90px;
+  animation: chef 10s ease-in-out infinite normal;
+}
+@keyframes chef {
+  0% {
+    transform: translate(-100px, 0);
+  }
+  25% {
+    transform: translate(100px, 0);
+  }
+  50% {
+    transform: translate(-100px, 0);
+  }
+  75% {
+    transform: translate(100px, 0);
+  }
+  100% {
+    transform: translate(-100px, 0);
+  }
+}
 .search-container {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 40%;
   max-width: 600px;
 }
-
 .search-input {
   width: 80%;
   padding: 10px;
@@ -74,7 +96,6 @@ header h1 a {
   border: none;
   font-size: 1em;
 }
-
 .search-button {
   background-color: #ff6f00;
   border: none;
@@ -179,13 +200,14 @@ h2 {
 }
 /* Sidebar for categories, visible on desktop */
 .sidebar {
+  display: none;
   position: fixed;
   right: 20px;
   top: 100px;
   background: white;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: none; /* Show on larger screens */
+  /* Show on larger screens */
 }
 @media (min-width: 768px) {
   .sidebar {
