@@ -11,6 +11,7 @@ body {
   padding-right: 50px;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 header {
   position: fixed;
@@ -104,22 +105,18 @@ header h1 a {
   cursor: pointer;
   margin-left: -40px;
 }
-
 .banner-text {
   margin-top: 200px;
   color: white;
 }
-
 .categories-section,
 .meals-section {
   padding: 20px;
 }
-
 .banner-text2 {
   color: white;
   font-size: 35px;
 }
-
 h2 {
   color: black;
   padding-bottom: 10px;
@@ -198,21 +195,22 @@ h2 {
   cursor: pointer;
   margin-bottom: 20px;
 }
-/* Sidebar for categories, visible on desktop */
+/* Sidebar for categories */
 .sidebar {
-  display: none;
   position: fixed;
-  right: 20px;
+  right: -300px; /* Start off-screen */
   top: 100px;
+  width: 250px;
   background: white;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Show on larger screens */
+  transition: right 0.3s ease-in-out;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  z-index: 1000;
 }
-@media (min-width: 768px) {
-  .sidebar {
-    display: block;
-  }
+.sidebar.active {
+  right: 0; /* Slide in fully */
 }
 .sidebar ul {
   list-style: none;
@@ -221,4 +219,23 @@ h2 {
 .sidebar li {
   margin-bottom: 10px;
   cursor: pointer;
+}
+/* Hide sidebar on small screens by default, show on toggle */
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+  .sidebar.active {
+    display: block;
+  }
+}
+/* On larger screens, sidebar is visible by default but can still toggle */
+@media (min-width: 768px) {
+  .sidebar {
+    display: block;
+    right: -350px; /* Off-screen by default */
+  }
+  .sidebar.active {
+    right: 20px; /* Slide in to a fixed position */
+  }
 }

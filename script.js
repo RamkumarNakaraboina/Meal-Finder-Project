@@ -1,5 +1,5 @@
 const API_BASE = "https://www.themealdb.com/api/json/v1/1/";
-let previousView = "home"; // To handle back navigation
+let previousView = "home";
 
 // Fetch and render categories on load
 async function loadCategories() {
@@ -23,15 +23,18 @@ async function loadCategories() {
       showCategoryDetails(cat.strCategory, cat.strCategoryDescription);
     grid.appendChild(card);
 
-    // Sidebar
-    const slidebar = document.querySelector(".menu-icon");
-    slidebar.addEventListener("click", () => {});
-
     const li = document.createElement("li");
     li.textContent = cat.strCategory;
     li.onclick = () =>
       showCategoryDetails(cat.strCategory, cat.strCategoryDescription);
     sidebarList.appendChild(li);
+  });
+
+  // Add click event to menu icon to toggle sidebar
+  const menuIcon = document.querySelector(".menu-icon");
+  const sidebar = document.querySelector(".sidebar");
+  menuIcon.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
   });
 }
 
@@ -92,7 +95,7 @@ document.querySelector(".search-button").onclick = async () => {
                     <p>${meal.strArea}</p>
                     <p>${meal.strMeal}</p>
                 `;
-    card.onclick = () => showFullMealDetails(meal); // Since search gives full data
+    card.onclick = () => showFullMealDetails(meal);
     grid.appendChild(card);
   });
 
@@ -125,7 +128,6 @@ function showFullMealDetails(meal) {
   document.getElementById("meal-instructions").textContent =
     meal.strInstructions;
 
-  // Ingredients
   const ingList = document.getElementById("ingredients-list");
   ingList.innerHTML = "";
   for (let i = 1; i <= 20; i++) {
@@ -137,7 +139,6 @@ function showFullMealDetails(meal) {
     }
   }
 
-  // Measures
   const measList = document.getElementById("measures-list");
   measList.innerHTML = "";
   for (let i = 1; i <= 20; i++) {
