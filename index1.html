@@ -1,292 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meal Finder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Meal Finder | Beru Website</title>
+
+    <!-- Futuristic font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
+      :root {
+        --accent: #ff6f00;
+        --bg: #f8f8f8;
+        --neon-a: #00ffe1;
+        --neon-b: #00bfff;
+      }
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #f8f8f8;
+        background: var(--bg);
+        color: #111;
+        -webkit-font-smoothing: antialiased;
       }
-      .icon-img {
-        width: 30px;
-        height: 30px;
-      }
-      .menu-icon {
-        padding-right: 50px;
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-      }
+
+      /* FIXED & STABLE HEADER */
       header {
         position: fixed;
         top: 0;
-        width: 100%;
-        z-index: 1000;
-        background-color: #ff6f00;
-        color: white;
-        padding: 30px;
+        left: 0;
+        right: 0;
+        height: 72px;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        padding: 12px 20px;
+        gap: 12px;
+        background: var(--accent);
+        color: #fff;
+        z-index: 1200;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        /* avoid using rotate/3d on header so layout won't shift */
+        transform: translateZ(0);
       }
-      .header-icon {
+      .header-left {
         display: flex;
-        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+      .icon-img {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
       }
       header h1 {
         margin: 0;
-        font-size: 1.5em;
+        font-size: 1.05rem;
       }
       header h1 a {
+        color: inherit;
         text-decoration: none;
-        color: white;
       }
+      .menu-icon {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        opacity: 0.95;
+      }
+
+      /* BANNER (keeps header stable with margin-top) */
       .banner {
-        background-color: rgba(0, 0, 0, 0.3);
-        color: white;
+        margin-top: 72px;
         height: 300px;
-        text-align: center;
-        padding: 50px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
         overflow: hidden;
-        z-index: 1;
-      }
-      .banner::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-          url("./accessts/images/background.jpeg") no-repeat center/cover;
-        filter: blur(3px);
-      }
-      .anime {
-        width: 100px;
-        height: 100px;
-        animation: chef 10s ease-in-out infinite normal;
-      }
-      @keyframes chef {
-        0% {
-          transform: translate(-100px, 0);
-        }
-        25% {
-          transform: translate(100px, 0);
-        }
-        50% {
-          transform: translate(-100px, 0);
-        }
-        75% {
-          transform: translate(100px, 0);
-        }
-        100% {
-          transform: translate(-100px, 0);
-        }
+        color: white;
+        background: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+          url("./accessts/images/background.jpeg") center/cover no-repeat;
       }
       .search-container {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40%;
-        max-width: 600px;
+        width: 72%;
+        max-width: 900px;
+        text-align: center;
+        position: relative;
+      }
+      .anime {
+        width: 92px;
+        height: 92px;
+        cursor: pointer;
+        transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.1, 1), filter 0.45s;
+        display: inline-block;
       }
       .search-input {
-        width: 80%;
-        padding: 10px;
-        border-radius: 20px;
+        width: 68%;
+        padding: 10px 14px;
+        border-radius: 28px;
         border: none;
-        font-size: 1em;
+        font-size: 1rem;
       }
       .search-button {
-        background-color: #ff6f00;
-        border: none;
+        margin-left: -44px;
         border-radius: 50%;
         padding: 10px;
+        border: none;
+        background: var(--accent);
         cursor: pointer;
-        margin-left: -40px;
       }
+
       .banner-text {
-        margin-top: 200px;
+        margin-top: 12px;
         color: white;
+        text-align: center;
       }
+      .banner-text2 {
+        font-size: 28px;
+        margin: 6px 0;
+      }
+
+      /* GRID / CARDS */
       .categories-section,
       .meals-section {
         padding: 20px;
       }
-      .banner-text2 {
-        color: white;
-        font-size: 35px;
-      }
       h2 {
-        color: black;
-        padding-bottom: 10px;
-        font-size: 20px;
+        color: #111;
+        font-size: 1.05rem;
+        margin: 0 0 12px 0;
       }
       .category-grid,
       .meal-grid {
         display: grid;
+        gap: 18px;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
       }
+
       .card {
         background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.45s, box-shadow 0.45s;
         cursor: pointer;
         position: relative;
       }
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 46px rgba(0, 0, 0, 0.12);
+      }
       .card img {
         width: 100%;
-        height: auto;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: 140px;
+        object-fit: cover;
+        display: block;
       }
       .card-label {
-        background: #ff6f00;
-        color: white;
-        padding: 5px 10px;
         position: absolute;
-        bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 4px;
-        font-size: 0.9em;
+        bottom: 12px;
+        background: var(--accent);
+        color: white;
+        padding: 6px 10px;
+        border-radius: 6px;
       }
+
       .meal-card {
-        text-align: left;
         padding: 10px;
+        text-align: left;
       }
       .meal-tag {
-        background: #ff6f00;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: var(--accent);
         color: white;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.8em;
+        font-size: 0.8rem;
       }
-      #meal-details {
-        padding: 20px;
-        display: none;
-      }
+
+      /* DETAILS */
+      #meal-details,
       #category-details {
         padding: 20px;
         display: none;
       }
       .ingredients-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
         gap: 10px;
       }
       .ingredient {
-        background: #ff6f00;
+        background: var(--accent);
         color: white;
-        padding: 5px;
+        padding: 6px;
         border-radius: 50%;
         text-align: center;
       }
-      .measures {
-        margin-top: 20px;
-      }
       .back-button {
-        background: #ff6f00;
+        background: var(--accent);
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 10px 14px;
+        border-radius: 8px;
         cursor: pointer;
-        margin-bottom: 20px;
       }
-      /* Sidebar for categories */
+
+      /* SIDEBAR */
       .sidebar {
         position: fixed;
-        right: -300px; /* Start off-screen */
-        top: 100px;
-        width: 250px;
+        right: -320px;
+        top: 90px;
+        width: 280px;
         background: white;
-        padding: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease-in-out;
-        height: calc(100vh - 100px);
-        overflow-y: auto;
-        z-index: 1000;
+        padding: 14px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        height: calc(100vh - 120px);
+        overflow: auto;
+        transition: right 0.35s ease;
+        z-index: 1100;
       }
       .sidebar.active {
-        right: 0; /* Slide in fully */
+        right: 20px;
       }
       .sidebar ul {
         list-style: none;
         padding: 0;
+        margin: 0;
       }
       .sidebar li {
         margin-bottom: 10px;
         cursor: pointer;
       }
-      /* Hide sidebar on small screens by default, show on toggle */
-      @media (max-width: 767px) {
-        .sidebar {
-          display: none;
+
+      /* UNIVERSAL TRANSITION (keeps animations smooth) */
+      * {
+        transition: all 0.45s cubic-bezier(0.2, 0.9, 0.1, 1);
+      }
+
+      /* ====== NEON / CAT-AI MODE ====== */
+      body.neon-mode {
+        font-family: "Orbitron", Arial, sans-serif;
+        background: radial-gradient(
+          circle at 30% 10%,
+          #040916 0%,
+          #000015 30%,
+          #000010 100%
+        );
+        color: var(--neon-a);
+        overflow-x: hidden;
+      }
+
+      /* HUD grid behind everything (pseudo) */
+      body.neon-mode::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 191, 255, 0.04) 0 2px,
+            transparent 2px 36px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(0, 191, 255, 0.03) 0 2px,
+            transparent 2px 36px
+          );
+        animation: gridMove 10s linear infinite;
+        mix-blend-mode: screen;
+        pointer-events: none;
+      }
+      @keyframes gridMove {
+        from {
+          background-position: 0 0, 0 0;
         }
-        .sidebar.active {
-          display: block;
+        to {
+          background-position: 160px 160px, -160px -160px;
         }
       }
-      /* On larger screens, sidebar is visible by default but can still toggle */
-      @media (min-width: 768px) {
-        .sidebar {
-          display: block;
-          right: -350px; /* Off-screen by default */
+
+      /* header style in neon-mode — avoid layout shifts */
+      body.neon-mode header {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 255, 225, 0.06),
+          rgba(0, 191, 255, 0.08)
+        );
+        color: #dff;
+        box-shadow: 0 0 40px rgba(0, 191, 255, 0.06),
+          inset 0 -2px 40px rgba(0, 255, 225, 0.03);
+      }
+
+      /* cards - holographic */
+      body.neon-mode .card {
+        background: linear-gradient(
+          180deg,
+          rgba(6, 6, 20, 0.8),
+          rgba(2, 2, 18, 0.6)
+        );
+        border: 1px solid rgba(0, 191, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 191, 255, 0.06);
+        transform: perspective(900px) rotateX(8deg);
+        animation: cardEnter 0.9s ease both;
+      }
+      @keyframes cardEnter {
+        from {
+          transform: perspective(900px) rotateY(90deg) scale(0.88);
+          opacity: 0;
         }
-        .sidebar.active {
-          right: 20px; /* Slide in to a fixed position */
+        to {
+          transform: perspective(900px) rotateY(0deg) scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* buttons & labels */
+      body.neon-mode .card-label,
+      body.neon-mode .meal-tag,
+      body.neon-mode .back-button {
+        background: linear-gradient(90deg, var(--neon-a), var(--neon-b));
+        color: #001;
+        box-shadow: 0 0 18px rgba(0, 191, 255, 0.7),
+          0 0 36px rgba(0, 128, 255, 0.12);
+      }
+
+      /* cat animation in neon-mode */
+      body.neon-mode .anime {
+        filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.9));
+        animation: catHolo 3.6s linear infinite;
+      }
+      @keyframes catHolo {
+        0% {
+          transform: translateY(0) rotateY(0) scale(1);
+        }
+        40% {
+          transform: translateY(-6px) rotateY(90deg) scale(1.06);
+        }
+        80% {
+          transform: translateY(0) rotateY(180deg) scale(1);
+        }
+        100% {
+          transform: translateY(0) rotateY(360deg) scale(1);
+        }
+      }
+
+      /* HUD canvas visible in neon-mode */
+      #hudCanvas {
+        position: fixed;
+        inset: 0;
+        z-index: 1150;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      body.neon-mode #hudCanvas {
+        opacity: 1;
+      }
+
+      /* activation flash */
+      .activation-flash {
+        position: fixed;
+        inset: 0;
+        z-index: 1300;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 255, 225, 0.12),
+          rgba(0, 0, 0, 0)
+        );
+        animation: flashIn 0.85s ease forwards;
+      }
+      @keyframes flashIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        40% {
+          opacity: 1;
+          transform: scale(1.02);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1.2);
+        }
+      }
+
+      /* small responsive tweaks */
+      @media (max-width: 600px) {
+        .search-container {
+          width: 92%;
+        }
+        .anime {
+          width: 78px;
+          height: 78px;
         }
       }
     </style>
   </head>
   <body>
     <header>
-      <div class="header-icon">
+      <div class="header-left">
         <img src="./accessts/icons/cutlery.png" alt="icon" class="icon-img" />
         <h1>
-          <a href="index.html">MEAL FINDER</a>
+          <a href="index1.html">MEAL FINDER | Beru(cat) - website owner</a>
         </h1>
       </div>
-      <img src="./accessts/icons/menu.png" alt="menu-icon" class="menu-icon" />
+      <img
+        src="./accessts/icons/menu.png"
+        alt="menu"
+        class="menu-icon"
+        id="menuToggle"
+      />
     </header>
+
     <div class="banner">
       <div class="search-container">
-        <div>
-          <img src="./accessts/images/cat-removebg-preview.png" class="anime" />
-        </div>
-        <input
-          type="text"
-          id="search-input"
-          class="search-input"
-          placeholder="Search recipes here..."
+        <img
+          src="./accessts/images/cat-removebg-preview.png"
+          alt="cat"
+          class="anime"
+          id="catToggle"
         />
-        <button class="search-button">🔍</button>
-      </div>
-      <div class="banner-text">
-        <h2 class="banner-text2">What are your favorite cuisines?</h2>
-        <p>PERSONALIZE YOUR EXPERIENCE</p>
+        <div style="margin-top: 12px">
+          <input
+            id="search-input"
+            class="search-input"
+            placeholder="Search recipes here..."
+          />
+          <button class="search-button">🔍</button>
+        </div>
+        <div class="banner-text">
+          <h2 class="banner-text2">What are your favorite cuisines?</h2>
+          <p>PERSONALIZE YOUR EXPERIENCE</p>
+        </div>
       </div>
     </div>
-    <div class="sidebar">
+
+    <!-- canvas HUD for rings/particles -->
+    <canvas id="hudCanvas"></canvas>
+
+    <div class="sidebar" id="sidebar">
       <ul id="sidebar-categories"></ul>
     </div>
+
     <section id="home" class="categories-section">
       <h2>CATEGORIES</h2>
       <div class="category-grid" id="category-grid"></div>
     </section>
+
     <section id="search-results" class="meals-section" style="display: none">
       <h2>MEALS</h2>
       <div class="meal-grid" id="search-grid"></div>
     </section>
+
     <section id="category-details" style="display: none">
       <button class="back-button" onclick="backToHome()">Back</button>
       <h2 id="category-title"></h2>
@@ -294,14 +469,15 @@
       <h3>MEALS</h3>
       <div class="meal-grid" id="category-meal-grid"></div>
     </section>
+
     <section id="meal-details" style="display: none">
       <button class="back-button" onclick="backFromDetails()">Back</button>
       <h2 id="meal-title"></h2>
       <img
         id="meal-image"
         src=""
-        alt="Meal Image"
-        style="width: 100%; max-width: 400px"
+        alt="Meal"
+        style="width: 100%; max-width: 420px"
       />
       <p>Category: <span id="meal-category"></span></p>
       <p>Source: <a id="meal-source" href=""></a></p>
@@ -313,122 +489,122 @@
       <h3>Instructions</h3>
       <p id="meal-instructions"></p>
     </section>
+
     <script>
+      /* ------------------------------
+       API + UI logic (kept simple)
+       ------------------------------ */
       const API_BASE = "https://www.themealdb.com/api/json/v1/1/";
       let previousView = "home";
 
-      // Fetch and render categories on load
       async function loadCategories() {
-        const res = await fetch(`${API_BASE}categories.php`);
-        const data = await res.json();
-        const categories = data.categories;
+        try {
+          const res = await fetch(API_BASE + "categories.php");
+          const data = await res.json();
+          const cats = data.categories || [];
+          const grid = document.getElementById("category-grid");
+          const side = document.getElementById("sidebar-categories");
+          grid.innerHTML = "";
+          side.innerHTML = "";
+          cats.forEach((cat) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `<div style="position:relative"><img src="${
+              cat.strCategoryThumb
+            }" alt="${
+              cat.strCategory
+            }" /><div class="card-label">${cat.strCategory.toUpperCase()}</div></div>`;
+            card.onclick = () =>
+              showCategoryDetails(cat.strCategory, cat.strCategoryDescription);
+            grid.appendChild(card);
 
-        const grid = document.getElementById("category-grid");
-        grid.innerHTML = "";
-        const sidebarList = document.getElementById("sidebar-categories");
-        sidebarList.innerHTML = "";
+            const li = document.createElement("li");
+            li.textContent = cat.strCategory;
+            li.onclick = () =>
+              showCategoryDetails(cat.strCategory, cat.strCategoryDescription);
+            side.appendChild(li);
+          });
 
-        categories.forEach((cat) => {
-          const card = document.createElement("div");
-          card.classList.add("card");
-          card.innerHTML = `
-                    <img src="${cat.strCategoryThumb}" alt="${cat.strCategory}">
-                    <div class="card-label">${cat.strCategory.toUpperCase()}</div>
-                `;
-          card.onclick = () =>
-            showCategoryDetails(cat.strCategory, cat.strCategoryDescription);
-          grid.appendChild(card);
-
-          const li = document.createElement("li");
-          li.textContent = cat.strCategory;
-          li.onclick = () =>
-            showCategoryDetails(cat.strCategory, cat.strCategoryDescription);
-          sidebarList.appendChild(li);
-        });
-
-        // Add click event to menu icon to toggle sidebar
-        const menuIcon = document.querySelector(".menu-icon");
-        const sidebar = document.querySelector(".sidebar");
-        menuIcon.addEventListener("click", () => {
-          sidebar.classList.toggle("active");
-        });
+          // menu toggle
+          document
+            .getElementById("menuToggle")
+            .addEventListener("click", () => {
+              document.getElementById("sidebar").classList.toggle("active");
+            });
+        } catch (err) {
+          console.error("categories load failed", err);
+        }
       }
 
-      // Show category details
       async function showCategoryDetails(category, description) {
         document.getElementById("home").style.display = "none";
         document.getElementById("search-results").style.display = "none";
-        const catDetails = document.getElementById("category-details");
-        catDetails.style.display = "block";
-
+        const area = document.getElementById("category-details");
+        area.style.display = "block";
         document.getElementById("category-title").textContent = category;
         document.getElementById("category-description").textContent =
           description;
-
-        const res = await fetch(`${API_BASE}filter.php?c=${category}`);
-        const data = await res.json();
-        const meals = data.meals || [];
-
-        const grid = document.getElementById("category-meal-grid");
-        grid.innerHTML = "";
-
-        meals.forEach((meal) => {
-          const card = document.createElement("div");
-          card.classList.add("card", "meal-card");
-          card.innerHTML = `
-                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-                    <p>${meal.strMeal}</p>
-                `;
-          card.onclick = () => showMealDetails(meal.idMeal, "category");
-          grid.appendChild(card);
-        });
-
+        try {
+          const res = await fetch(
+            API_BASE + "filter.php?c=" + encodeURIComponent(category)
+          );
+          const data = await res.json();
+          const meals = data.meals || [];
+          const grid = document.getElementById("category-meal-grid");
+          grid.innerHTML = "";
+          meals.forEach((m) => {
+            const card = document.createElement("div");
+            card.className = "card meal-card";
+            card.innerHTML = `<img src="${m.strMealThumb}" alt="${m.strMeal}" /><p style="padding:8px 0 0 0">${m.strMeal}</p>`;
+            card.onclick = () => showMealDetails(m.idMeal, "category");
+            grid.appendChild(card);
+          });
+        } catch (e) {
+          console.error(e);
+        }
         previousView = "category";
       }
 
-      // Search functionality
       document.querySelector(".search-button").onclick = async () => {
-        const query = document.getElementById("search-input").value.trim();
-        if (!query) return;
-
+        const q = document.getElementById("search-input").value.trim();
+        if (!q) return;
         document.getElementById("home").style.display = "none";
         document.getElementById("category-details").style.display = "none";
-        const searchResults = document.getElementById("search-results");
-        searchResults.style.display = "block";
-
-        const res = await fetch(`${API_BASE}search.php?s=${query}`);
-        const data = await res.json();
-        const meals = data.meals || [];
-
-        const grid = document.getElementById("search-grid");
-        grid.innerHTML = "";
-
-        meals.forEach((meal) => {
-          const card = document.createElement("div");
-          card.classList.add("card", "meal-card");
-          card.innerHTML = `
-                    <span class="meal-tag">${meal.strCategory}</span>
-                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-                    <p>${meal.strArea}</p>
-                    <p>${meal.strMeal}</p>
-                `;
-          card.onclick = () => showFullMealDetails(meal);
-          grid.appendChild(card);
-        });
-
+        const sr = document.getElementById("search-results");
+        sr.style.display = "block";
+        try {
+          const res = await fetch(
+            API_BASE + "search.php?s=" + encodeURIComponent(q)
+          );
+          const data = await res.json();
+          const meals = data.meals || [];
+          const grid = document.getElementById("search-grid");
+          grid.innerHTML = "";
+          meals.forEach((meal) => {
+            const card = document.createElement("div");
+            card.className = "card meal-card";
+            card.innerHTML = `<span class="meal-tag">${meal.strCategory}</span><img src="${meal.strMealThumb}" alt="${meal.strMeal}" /><p>${meal.strArea}</p><p>${meal.strMeal}</p>`;
+            card.onclick = () => showFullMealDetails(meal);
+            grid.appendChild(card);
+          });
+        } catch (e) {
+          console.error(e);
+        }
         previousView = "search";
       };
 
-      // Show meal details from ID (for category lists)
       async function showMealDetails(id, from) {
-        const res = await fetch(`${API_BASE}lookup.php?i=${id}`);
-        const data = await res.json();
-        const meal = data.meals[0];
-        showFullMealDetails(meal);
-        previousView = from;
+        try {
+          const res = await fetch(API_BASE + "lookup.php?i=" + id);
+          const data = await res.json();
+          const meal = data.meals[0];
+          showFullMealDetails(meal);
+          previousView = from;
+        } catch (e) {
+          console.error(e);
+        }
       }
 
-      // Show full meal details
       function showFullMealDetails(meal) {
         document.getElementById("home").style.display = "none";
         document.getElementById("search-results").style.display = "none";
@@ -439,57 +615,333 @@
         document.getElementById("meal-title").textContent = meal.strMeal;
         document.getElementById("meal-image").src = meal.strMealThumb;
         document.getElementById("meal-category").textContent = meal.strCategory;
-        document.getElementById("meal-source").href = meal.strSource;
-        document.getElementById("meal-source").textContent = meal.strSource;
+        document.getElementById("meal-source").href = meal.strSource || "#";
+        document.getElementById("meal-source").textContent =
+          meal.strSource || "Source";
         document.getElementById("meal-tags").textContent =
           meal.strTags || "None";
         document.getElementById("meal-instructions").textContent =
-          meal.strInstructions;
+          meal.strInstructions || "";
 
         const ingList = document.getElementById("ingredients-list");
         ingList.innerHTML = "";
         for (let i = 1; i <= 20; i++) {
-          if (meal[`strIngredient${i}`]) {
-            const ing = document.createElement("div");
-            ing.classList.add("ingredient");
-            ing.textContent = meal[`strIngredient${i}`];
-            ingList.appendChild(ing);
+          const ing = meal["strIngredient" + i];
+          if (ing && ing.trim()) {
+            const el = document.createElement("div");
+            el.className = "ingredient";
+            el.textContent = ing;
+            ingList.appendChild(el);
           }
         }
-
         const measList = document.getElementById("measures-list");
         measList.innerHTML = "";
         for (let i = 1; i <= 20; i++) {
-          if (meal[`strMeasure${i}`]) {
+          const meas = meal["strMeasure" + i];
+          if (meas && meas.trim()) {
             const li = document.createElement("li");
-            li.textContent = meal[`strMeasure${i}`];
+            li.textContent = meas;
             measList.appendChild(li);
           }
         }
       }
 
-      // Back to home
       function backToHome() {
         document.getElementById("category-details").style.display = "none";
         document.getElementById("search-results").style.display = "none";
         document.getElementById("meal-details").style.display = "none";
         document.getElementById("home").style.display = "block";
       }
-
-      // Back from details
       function backFromDetails() {
         document.getElementById("meal-details").style.display = "none";
-        if (previousView === "category") {
+        if (previousView === "category")
           document.getElementById("category-details").style.display = "block";
-        } else if (previousView === "search") {
+        else if (previousView === "search")
           document.getElementById("search-results").style.display = "block";
-        } else {
-          backToHome();
+        else backToHome();
+      }
+
+      // initial
+      loadCategories();
+
+      /* ------------------------------
+       NEON MODE: Canvas HUD, WebAudio, Speech
+       ------------------------------ */
+
+      const cat = document.getElementById("catToggle");
+      const canv = document.getElementById("hudCanvas");
+      const ctx = canv.getContext && canv.getContext("2d");
+      let particleArray = [],
+        ringArray = [],
+        animId = null,
+        particleTicker = null;
+      let audioCtx = null;
+
+      // canvas sizing
+      function sizeCanvas() {
+        const ratio = window.devicePixelRatio || 1;
+        canv.width = innerWidth * ratio;
+        canv.height = innerHeight * ratio;
+        canv.style.width = innerWidth + "px";
+        canv.style.height = innerHeight + "px";
+        if (ctx) ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      }
+      window.addEventListener("resize", sizeCanvas);
+      sizeCanvas();
+
+      // spawn helpers
+      function spawnParticle(x, y) {
+        particleArray.push({
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 2.2,
+          vy: (Math.random() - 0.5) * 2.2,
+          r: 1 + Math.random() * 3,
+          life: 60 + Math.random() * 60,
+          hue: 190 + Math.random() * 40,
+        });
+      }
+      function spawnRing(x, y) {
+        ringArray.push({
+          x,
+          y,
+          r: 8,
+          max: 200 + Math.random() * 150,
+          w: 2,
+          hue: 190 + Math.random() * 40,
+        });
+      }
+
+      // draw loop
+      function hudLoop() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+        // rings
+        for (let i = ringArray.length - 1; i >= 0; i--) {
+          const R = ringArray[i];
+          ctx.beginPath();
+          ctx.strokeStyle = `hsla(${R.hue},100%,60%,${1 - R.r / R.max})`;
+          ctx.lineWidth = R.w;
+          ctx.arc(R.x, R.y, R.r, 0, Math.PI * 2);
+          ctx.stroke();
+          R.r += 2.5;
+          R.w *= 0.995;
+          if (R.r > R.max) ringArray.splice(i, 1);
+        }
+
+        // particles
+        for (let i = particleArray.length - 1; i >= 0; i--) {
+          const p = particleArray[i];
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${p.hue},100%,60%,${Math.max(
+            0,
+            p.life / 120
+          )})`;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= 1;
+          if (p.life <= 0) particleArray.splice(i, 1);
+        }
+
+        // subtle radial glow at top center
+        const cx = innerWidth * 0.5,
+          cy = innerHeight * 0.22;
+        const g = ctx.createRadialGradient(cx, cy, 10, cx, cy, 260);
+        g.addColorStop(0, "rgba(0,255,225,0.06)");
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(cx - 260, cy - 260, 520, 520);
+
+        animId = requestAnimationFrame(hudLoop);
+      }
+
+      function startHUD() {
+        cancelHUD();
+        animId = requestAnimationFrame(hudLoop);
+        particleTicker = setInterval(() => {
+          spawnParticle(
+            innerWidth * 0.4 + Math.random() * innerWidth * 0.2,
+            innerHeight * 0.15 + Math.random() * innerHeight * 0.5
+          );
+          if (Math.random() > 0.8)
+            spawnRing(
+              innerWidth * 0.5 + (Math.random() - 0.5) * 200,
+              innerHeight * 0.2 + (Math.random() - 0.5) * 120
+            );
+        }, 120);
+      }
+      function cancelHUD() {
+        if (animId) cancelAnimationFrame(animId);
+        animId = null;
+        if (particleTicker) {
+          clearInterval(particleTicker);
+          particleTicker = null;
         }
       }
 
-      // Load on start
-      loadCategories();
+      // WebAudio: simple beep sequence & ambient
+      function initAudio() {
+        if (audioCtx) return;
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      function playBeepSeq() {
+        initAudio();
+        const now = audioCtx.currentTime;
+        for (let i = 0; i < 5; i++) {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.type = "sine";
+          o.frequency.value = 220 + i * 90;
+          g.gain.value = 0;
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.start(now + i * 0.05);
+          g.gain.setValueAtTime(0, now + i * 0.05);
+          g.gain.linearRampToValueAtTime(0.08, now + i * 0.05 + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.05 + 0.12);
+          o.stop(now + i * 0.05 + 0.16);
+        }
+      }
+      function playAmbient() {
+        initAudio();
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = "sawtooth";
+        o.frequency.value = 60;
+        g.gain.value = 0.02;
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        setTimeout(() => {
+          g.gain.exponentialRampToValueAtTime(
+            0.0001,
+            audioCtx.currentTime + 1.2
+          );
+          setTimeout(() => o.stop(), 1300);
+        }, 1400);
+      }
+
+      // speech: calm AI voice (speechSynthesis)
+      function speak(lines) {
+        if (!("speechSynthesis" in window)) return;
+        let voices = speechSynthesis.getVoices() || [];
+        function doSpeak() {
+          for (const t of lines) {
+            const u = new SpeechSynthesisUtterance(t);
+            u.lang = "en-US";
+            u.pitch = 0.85;
+            u.rate = 0.95;
+            // pick a pleasant voice if available
+            const pref = voices.find((v) =>
+              /Google|Samantha|Alex|Microsoft|en-US/i.test(v.name)
+            );
+            if (pref) u.voice = pref;
+            speechSynthesis.speak(u);
+          }
+        }
+        if (voices.length === 0) {
+          speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+            doSpeak();
+          };
+        } else doSpeak();
+      }
+
+      // activation & deactivation sequences
+      function activationSequence(x, y) {
+        // flash
+        const flash = document.createElement("div");
+        flash.className = "activation-flash";
+        document.body.appendChild(flash);
+        setTimeout(() => flash.remove(), 900);
+
+        // audio & speech
+        playBeepSeq();
+        setTimeout(() => playAmbient(), 360);
+        setTimeout(
+          () =>
+            speak([
+              "Hello. I am Cat-AI. Welcome to your Meal Finder interface.",
+              "Click the cat again to return to normal.",
+            ]),
+          560
+        );
+
+        // visual burst near cat
+        for (let i = 0; i < 24; i++)
+          spawnParticle(
+            x + (Math.random() - 0.5) * 80,
+            y + (Math.random() - 0.5) * 80
+          );
+        spawnRing(x, y);
+      }
+      function deactivationSequence(x, y) {
+        // descending beep & sign off
+        initAudio();
+        const now = audioCtx.currentTime;
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = "sine";
+        o.frequency.value = 360;
+        g.gain.value = 0.0001;
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start(now);
+        g.gain.linearRampToValueAtTime(0.06, now + 0.02);
+        o.frequency.exponentialRampToValueAtTime(120, now + 0.5);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
+        setTimeout(() => o.stop(), 920);
+
+        speak(["Goodbye. Returning to normal mode."]);
+
+        for (let i = 0; i < 12; i++)
+          spawnParticle(
+            x + (Math.random() - 0.5) * 100,
+            y + (Math.random() - 0.5) * 100
+          );
+      }
+
+      // toggle neon mode on cat click
+      cat.addEventListener("click", async (ev) => {
+        // resume audio context if needed (user gesture)
+        try {
+          if (audioCtx && audioCtx.state === "suspended")
+            await audioCtx.resume();
+        } catch (e) {}
+        const rect = cat.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+
+        document.body.classList.toggle("neon-mode");
+        const on = document.body.classList.contains("neon-mode");
+        if (on) {
+          // warm up voices (some browsers need user gesture)
+          if (window.speechSynthesis) window.speechSynthesis.getVoices();
+          sizeCanvas();
+          startHUD();
+          activationSequence(cx, cy);
+        } else {
+          deactivationSequence(cx, cy);
+          cancelHUD();
+        }
+      });
+
+      // warm voices on first user click for snappy TTS
+      window.addEventListener(
+        "click",
+        () => {
+          if (window.speechSynthesis) window.speechSynthesis.getVoices();
+        },
+        { once: true }
+      );
+
+      // cancel TTS if user leaves page
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && window.speechSynthesis) speechSynthesis.cancel();
+      });
     </script>
   </body>
 </html>

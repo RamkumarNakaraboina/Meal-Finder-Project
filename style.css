@@ -61,8 +61,8 @@ header h1 a {
   filter: blur(3px);
 }
 .anime {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   animation: chef 10s ease-in-out infinite normal;
 }
 @keyframes chef {
