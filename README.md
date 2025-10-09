@@ -7,7 +7,7 @@ The **Meal Finder App** is a responsive web application built with **HTML, CSS, 
 ## 🚀 Features
 
 ✅ **Search Meals:**  
-Easily search for any meal or recipe using keywords.
+Easily search for any meal or recipe using keywords
 
 ✅ **View Categories:**  
 Browse meals by category (like Chicken, Seafood, Dessert, etc.).
