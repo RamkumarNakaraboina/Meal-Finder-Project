@@ -1,4 +1,4 @@
-# 🍽️ Meal Finder App 
+# 🍽️ Meal Finder App
 
 The **Meal Finder App** is a responsive web application built with **HTML, CSS, and JavaScript** that allows users to search and explore meals, ingredients, and recipes using the [TheMealDB API](https://www.themealdb.com/api.php).
 
@@ -14,10 +14,11 @@ Browse meals by category (like Chicken, Seafood, Dessert, etc.).
 
 ✅ **Meal Details:**  
 Get complete details about a meal including:
-- Ingredients and Measures  
-- Instructions  
-- Tags  
-- Source link  
+
+- Ingredients and Measures
+- Instructions
+- Tags
+- Source link
 
 ✅ **Responsive UI:**  
 Clean and modern design that works on desktop and mobile screens.
@@ -30,6 +31,7 @@ Toggle sidebar menu for quick category access.
 ## 🧠 Concepts Covered (JavaScript Learning Highlights)
 
 This project helps you understand and practice key JavaScript concepts such as:
+
 - **Fetch API** (working with REST APIs)
 - **Async / Await** for asynchronous programming
 - **DOM Manipulation** (creating, updating, and deleting elements dynamically)
@@ -43,11 +45,11 @@ This project helps you understand and practice key JavaScript concepts such as:
 
 ## ⚙️ Tech Stack
 
-| Technology | Purpose |
-|-------------|----------|
-| HTML5 | Structure and layout |
-| CSS3 | Styling and responsiveness |
-| JavaScript| Logic, interactivity, and API handling |
-| [TheMealDB API](https://www.themealdb.com/api.php) | Provides meal data |
+| Technology                                         | Purpose                                |
+| -------------------------------------------------- | -------------------------------------- |
+| HTML5                                              | Structure and layout                   |
+| CSS3                                               | Styling and responsiveness             |
+| JavaScript                                         | Logic, interactivity, and API handling |
+| [TheMealDB API](https://www.themealdb.com/api.php) | Provides meal data                     |
 
 ---
