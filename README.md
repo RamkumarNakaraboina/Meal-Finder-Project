@@ -1,4 +1,4 @@
-# 🍽️ Meal Finder App
+# 🍽️ Meal Finder App 
 
 The **Meal Finder App** is a responsive web application built with **HTML, CSS, and JavaScript** that allows users to search and explore meals, ingredients, and recipes using the [TheMealDB API](https://www.themealdb.com/api.php).
 
