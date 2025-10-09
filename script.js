@@ -157,7 +157,6 @@ function backToHome() {
   document.getElementById("meal-details").style.display = "none";
   document.getElementById("home").style.display = "block";
 }
-
 // Back from details
 function backFromDetails() {
   document.getElementById("meal-details").style.display = "none";
@@ -169,6 +168,5 @@ function backFromDetails() {
     backToHome();
   }
 }
-
 // Load on start
 loadCategories();
